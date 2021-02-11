@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>BlackBoard</title>
+
+    <!-- Bootstrap core CSS-->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Page level plugin CSS-->
+    <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+    <%- include('headbar');%>
+        <div id="wrapper">
+            <%- include('sidebar');%>
+
+                <div id="content-wrapper">
+
+                    <div class="container-fluid">
+
+                        <div class="list-group">
+
+                            <% var dateNow = new Date()
+                    for (i=0; i<taskList.length; i++) {
+                        var clotureColor = ""
+                      if (taskList[i].dateCloture != null) {
+                        clotureColor="list-group-item-success"
+                      }
+                      else if (taskList[i].dateDue<dateNow && taskList[i].dateCloture == null) {
+                        clotureColor="list-group-item-danger"
+                      }%>
+                                <a href="#" class="list-group-item list-group-item-action <%=clotureColor%>">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-1">
+                                            <%=taskList[i].name%>
+                                        </h5>
+                                        <small>Date de la demande: <%=taskList[i].dateInsert.getDate()%>/<%=taskList[i].dateInsert.getMonth()+1%>/<%=taskList[i].dateInsert.getFullYear()%></small>
+                                    </div>
+                                    <p class="mb-1"></p>
+                                    <% switch (clotureColor) {
+                              case 'list-group-item-success':%>
+                                        <small>Cloturée le: <%=taskList[i].dateCloture.getDate()%>/<%=taskList[i].dateCloture.getMonth()+1%>/<%=taskList[i].dateCloture.getFullYear()%></small>
+                                        <%break;%>
+                                            <%case 'list-group-item-danger':%>
+                                                <small>Echéance dépaseée: <%=taskList[i].dateDue.getDate()%>/<%=taskList[i].dateDue.getMonth()+1%>/<%=taskList[i].dateDue.getFullYear()%></small>
+                                                <%break;%>
+                                                    <%case '':%>
+                                                        <small>Echéance: <%=taskList[i].dateDue.getDate()%>/<%=taskList[i].dateDue.getMonth()+1%>/<%=taskList[i].dateDue.getFullYear()%></small>
+                                                        <%break;}%>
+                                </a>
+                                <%}%>
+                        </div>
+
+
+                    </div>
+                    <!-- /.container-fluid -->
+
+                    <!-- Sticky Footer -->
+                    <footer class="sticky-footer">
+                        <div class="container my-auto">
+                            <div class="copyright text-center my-auto">
+                                <span>Copyright © Blackboard</span>
+                            </div>
+                        </div>
+                    </footer>
+
+                </div>
+                <!-- /.content-wrapper -->
+
+        </div>
+        <!-- /#wrapper -->
+
+
+
+        <!-- Bootstrap core JavaScript-->
+        <script src="vendor/jquery/jquery.min.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+        <!-- Core plugin JavaScript-->
+        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+        <!-- Page level plugin JavaScript-->
+        <script src="vendor/chart.js/Chart.min.js"></script>
+
+        <!-- Custom scripts for all pages-->
+        <script src="js/sb-admin.min.js"></script>
+
+</body>
+
+</html>
